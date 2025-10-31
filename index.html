@@ -25,6 +25,10 @@
             --color-accent: #007bff; /* A professional blue accent */
             --color-accent-dark: #0056b3;
             --color-border: #eeeeee;
+
+            /* ADDED: Custom brand color from your buttons */
+            --color-brand: #a55829;
+            --color-brand-dark: #844621;
         }
 
         * {
@@ -112,20 +116,20 @@
 
         /* ADDED: Specific style for the hero button */
         .btn-hero {
-            background-color: #a55829;
+            background-color: var(--color-brand);
         }
         
         .btn-hero:hover {
-            background-color: #844621; /* Darker shade of #a55829 for hover */
+            background-color: var(--color-brand-dark); /* Darker shade */
         }
 
         /* ADDED: Specific style for the contact button */
         .btn-contact {
-            background-color: #a55829;
+            background-color: var(--color-brand);
         }
         
         .btn-contact:hover {
-            background-color: #844621; /* Darker shade of #a55829 for hover */
+            background-color: var(--color-brand-dark); /* Darker shade */
         }
 
         /* --- 3. Header & Navigation --- */
@@ -268,6 +272,8 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
+            /* ADDED: Cursor to show it's clickable */
+            cursor: pointer; 
         }
 
         .portfolio-item:hover img {
@@ -404,6 +410,99 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* --- ADDED: 11. Back to Top Button --- */
+        #backToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            border: none;
+            outline: none;
+            background-color: var(--color-brand); /* Matches your CTA buttons */
+            color: white;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            line-height: 45px; /* Centers the arrow */
+            text-align: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        #backToTopBtn:hover {
+            background-color: var(--color-brand-dark); /* Matches CTA hover */
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* This class is added by JS */
+        #backToTopBtn.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* --- ADDED: 12. Lightbox Modal --- */
+        .lightbox-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000; /* Must be on top of everything */
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            width: auto;
+            max-width: 80%;
+            max-height: 80vh;
+            border-radius: 5px;
+            /* ADDED: Simple zoom animation */
+            animation: zoomIn 0.4s ease;
+        }
+
+        #lightboxCaption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            font-family: var(--primary-font);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover {
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        /* ADDED: Animation for modal content */
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
         
         /* Tablet Responsive Styles */
         @media (max-width: 992px) {
@@ -454,6 +553,11 @@
             .process-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+            }
+
+            /* ADDED: Responsive modal styles */
+            .lightbox-content {
+                max-width: 90%;
             }
         }
 
@@ -517,28 +621,29 @@
             <div class="container">
                 <h2 class="fade-in">Our Designs</h2>
                 <div class="portfolio-grid">
+                    <!-- NOTE: The JS will now make these images clickable -->
                     <div class="portfolio-item fade-in">
-                        <img src="https://ik.imagekit.io/siey4arglq/Whisk_273735d53b.jpg" alt="T-shirt mockup with a minimalist geometric bear design">
+                        <img src="https://ik.imagekit.io/siey4arglq/Whisk_273735d53b.jpg">
                     </div>
                     
                     <div class="portfolio-item fade-in">
-                        <img src="https://ik.imagekit.io/siey4arglq/2.jpg" alt="T-shirt mockup with an abstract line art design">
+                        <img src="https://ik.imagekit.io/siey4arglq/2.jpg">
                     </div>
                     
                     <div class="portfolio-item fade-in">
-                        <img src="https://ik.imagekit.io/siey4arglq/1d%20(1)%20(1).jpg?updatedAt=1761934066104" alt="T-shirt mockup with floral typography design">
+                        <img src="https://ik.imagekit.io/siey4arglq/1d%20(1)%20(1).jpg?updatedAt=1761934066104">
                     </div>
                     
                     <div class="portfolio-item fade-in">
-                        <img src="https://ik.imagekit.io/siey4arglq/1.jpg?updatedAt=1761934057374" alt="T-shirt mockup with a retro 80s synthwave design">
+                        <img src="https://ik.imagekit.io/siey4arglq/1.jpg?updatedAt=1761934057374">
                     </div>
                     
                     <div class="portfolio-item fade-in">
-                        <img src="https://ik.imagekit.io/siey4arglq/d1.jpg?updatedAt=1761934040546" alt="T-shirt mockup with a mountain range silhouette design">
+                        <img src="https://ik.imagekit.io/siey4arglq/d1.jpg?updatedAt=1761934040546">
                     </div>
                     
                     <div class="portfolio-item fade-in">
-                        <img src="https://ik.imagekit.io/siey4arglq/2s.jpg?updatedAt=1761934052829" alt="T-shirt mockup with a vintage astronaut design">
+                        <img src="https://ik.imagekit.io/siey4arglq/2s.jpg?updatedAt=1761934052829">
                     </div>
                 </div>
             </div>
@@ -610,6 +715,16 @@
         </div>
     </footer>
 
+    <!-- ADDED: Back to Top Button -->
+    <a href="#hero" id="backToTopBtn" title="Go to top">&uarr;</a>
+
+    <!-- ADDED: Lightbox Modal Structure -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" alt="Enlarged design view">
+        <div id="lightboxCaption"></div>
+    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -643,7 +758,7 @@
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     if (!emailRegex.test(email)) {
                         formMessage.textContent = 'Please enter a valid email address.';
-                        formMessage.classList.add('error');
+                        formMessage.classList.Add('error');
                         return;
                     }
 
@@ -681,13 +796,55 @@
                 appearOnScroll.observe(fader);
             });
 
+            // --- ADDED: 3. Back to Top Button Logic ---
+            const backToTopBtn = document.getElementById('backToTopBtn');
+
+            window.addEventListener('scroll', function() {
+                // Show button after scrolling down 200px
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            // Note: The smooth scroll is handled by `scroll-behavior: smooth;` in the CSS
+
+            // --- ADDED: 4. Lightbox Modal Logic ---
+            const modal = document.getElementById('lightboxModal');
+            const modalImg = document.getElementById('lightboxImg');
+            const captionText = document.getElementById('lightboxCaption');
+            const closeBtn = document.querySelector('.lightbox-close');
+            
+            // Get all portfolio images
+            const portfolioImages = document.querySelectorAll('.portfolio-item img');
+            
+            // Loop through each image and add a click event
+            portfolioImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    modal.style.display = 'block';
+                    modalImg.src = this.src;
+                    captionText.innerHTML = this.alt || ''; // Use the alt text as a caption (or empty string if no alt)
+                });
+            });
+
+            // Function to close the modal
+            function closeModal() {
+                modal.style.display = 'none';
+            }
+
+            // Close the modal when the 'x' is clicked
+            closeBtn.addEventListener('click', closeModal);
+
+            // Close the modal when clicking on the background (outside the image)
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
         });
     </script>
 
 </body>
 </html>
-
-
-
-
 
