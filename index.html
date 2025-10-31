@@ -205,10 +205,16 @@
             justify-content: center;
             text-align: center;
             padding: 0 1.5rem;
+            /* ADDED: For parallax effect */
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-content {
             max-width: 800px;
+            /* ADDED: For parallax effect. Will be manipulated by JS */
+            will-change: transform, opacity;
+            transition: transform 0.1s linear, opacity 0.1s linear;
         }
 
         #hero h1 {
@@ -242,6 +248,46 @@
             line-height: 1.8;
         }
 
+        /* --- ADDED: 5b. Services Section --- */
+        #services {
+            /* Kept with the white background, alternating from grey #about */
+            background-color: var(--color-bg); 
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2x2 grid on desktop */
+            gap: 3rem;
+            text-align: center;
+            max-width: 900px; /* Constrain width a bit */
+            margin: 0 auto;
+        }
+
+        .service-item {
+            padding: 2rem 1.5rem;
+            transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            background-color: var(--color-bg-alt); /* Light grey background for items */
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            background-color: var(--color-bg); /* White on hover */
+        }
+
+        .service-item .icon {
+            font-size: 3rem;
+            color: var(--color-brand); /* Use brand color for icons */
+            margin-bottom: 1.5rem;
+        }
+
+        .service-item h3 {
+            font-size: 1.25rem;
+            color: var(--color-text);
+        }
+
         /* --- 6. Portfolio / Designs Gallery --- */
         #portfolio {
             background-color: var(--color-bg-alt);
@@ -260,6 +306,17 @@
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: box-shadow 0.3s ease, transform 0.3s ease;
+            
+            /* ADDED: Animation styles for staggered fade-in */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* ADDED: Visible state for staggered fade-in */
+        .portfolio-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .portfolio-item:hover {
@@ -290,6 +347,16 @@
 
         .process-step {
             padding: 1rem;
+            /* ADDED: Transitions for hover effect */
+            transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            border-radius: 8px; /* Added for hover effect */
+        }
+
+        /* ADDED: Hover animation for process steps */
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            background-color: var(--color-bg); /* Use light bg to make shadow visible */
         }
 
         .process-step .icon {
@@ -399,7 +466,7 @@
 
         /* --- 10. Animation & Responsive Design --- */
 
-        /* Subtle fade-in animation */
+        /* Subtle fade-in animation (for general elements) */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -411,7 +478,7 @@
             transform: translateY(0);
         }
 
-        /* --- ADDED: 11. Back to Top Button --- */
+        /* --- 11. Back to Top Button --- */
         #backToTopBtn {
             display: none; /* Hidden by default */
             position: fixed;
@@ -446,7 +513,7 @@
             opacity: 1;
         }
 
-        /* --- ADDED: 12. Lightbox Modal --- */
+        /* --- 12. Lightbox Modal --- */
         .lightbox-modal {
             display: none; /* Hidden by default */
             position: fixed;
@@ -550,7 +617,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .process-grid {
+            .services-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -575,6 +642,8 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
+                    <!-- ADDED: Services Link -->
+                    <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Designs</a></li>
                     <li><a href="#process">Process</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -586,7 +655,8 @@
     <main>
 
         <section id="hero">
-            <div class="hero-content fade-in">
+            <!-- MODIFIED: Removed .fade-in, parallax is handled by JS -->
+            <div class="hero-content">
                 
                 <!-- MODIFIED: Image moved above h1 and styles for border/shadow removed -->
                 <img src="https://ik.imagekit.io/siey4arglq/Whisk_862786e0a5d1db7aa6d4fe1cb4ab6b31eg-Photoroom.png?updatedAt=1761932773289" 
@@ -617,32 +687,68 @@
             </div>
         </section>
 
+        <!-- ADDED: New Services Section -->
+        <section id="services">
+            <div class="container">
+                <h2 class="fade-in">Our Services</h2>
+                <div class="services-grid">
+                    
+                    <div class="service-item fade-in">
+                        <div class="icon">👕</div> 
+                        <h3>Custom Apparel Design</h3>
+                        <p>Unique, 100% original graphics created exclusively for your clothing line or personal brand.</p>
+                    </div>
+                    
+                    <div class="service-item fade-in">
+                        <div class="icon">🎨</div> 
+                        <h3>Brand Identity</h3>
+                        <p>Logo design, color palettes, and visual guidelines that capture your brand's essence.</p>
+                    </div>
+                    
+                    <div class="service-item fade-in">
+                        <div class="icon">🖼️</div> 
+                        <h3>Illustration Commissions</h3>
+                        <p>Bespoke artwork for digital use, print, or special projects, crafted in our signature style.</p>
+                    </div>
+
+                    <div class="service-item fade-in">
+                        <div class="icon">🤝</div> 
+                        <h3>Collaboration Opportunities</h3>
+                        <p>We're open to partnering with other creators, brands, and shops on exciting new projects.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
         <section id="portfolio">
             <div class="container">
                 <h2 class="fade-in">Our Designs</h2>
-                <div class="portfolio-grid">
+                <!-- MODIFIED: Added 'stagger-grid-container' class for the new JS observer -->
+                <div class="portfolio-grid stagger-grid-container">
                     <!-- NOTE: The JS will now make these images clickable -->
-                    <div class="portfolio-item fade-in">
+                    <!-- MODIFIED: Removed 'fade-in' class from all items -->
+                    <div class="portfolio-item">
                         <img src="https://ik.imagekit.io/siey4arglq/Whisk_273735d53b.jpg">
                     </div>
                     
-                    <div class="portfolio-item fade-in">
+                    <div class="portfolio-item">
                         <img src="https://ik.imagekit.io/siey4arglq/2.jpg">
                     </div>
                     
-                    <div class="portfolio-item fade-in">
+                    <div class="portfolio-item">
                         <img src="https://ik.imagekit.io/siey4arglq/1d%20(1)%20(1).jpg?updatedAt=1761934066104">
                     </div>
                     
-                    <div class="portfolio-item fade-in">
+                    <div class="portfolio-item">
                         <img src="https://ik.imagekit.io/siey4arglq/1.jpg?updatedAt=1761934057374">
                     </div>
                     
-                    <div class="portfolio-item fade-in">
+                    <div class="portfolio-item">
                         <img src="https://ik.imagekit.io/siey4arglq/d1.jpg?updatedAt=1761934040546">
                     </div>
                     
-                    <div class="portfolio-item fade-in">
+                    <div class="portfolio-item">
                         <img src="https://ik.imagekit.io/siey4arglq/2s.jpg?updatedAt=1761934052829">
                     </div>
                 </div>
@@ -656,12 +762,12 @@
                     
                     <div class="process-step fade-in">
                         <div class="icon">✏️</div> <h3>1. Concept & Sketch</h3>
-                        <p>Every design starts as an original idea. We brainstorm, research trends, and create foundational sketches by hand or digitally.</p>
+                        <p>Every design starts as an original idea. We build mood boards, research trends, and create foundational sketches by hand or digitally.</p>
                     </div>
                     
                     <div class="process-step fade-in">
                         <div class="icon">🖥️</div> <h3>2. Digital Illustration</h3>
-                        <p>Sketches are transformed into high-resolution, print-ready vector or raster graphics using professional design software.</p>
+                        <p>Sketches are transformed into high-resolution graphics. We explore multiple design iterations and create sketch-to-final comparisons to ensure the concept is perfected.</p>
                     </div>
                     
                     <div class="process-step fade-in">
@@ -772,7 +878,7 @@
             }
 
             
-            // --- 2. Subtle Fade-in Animation on Scroll ---
+            // --- 2. Subtle Fade-in Animation on Scroll (General) ---
             
             const faders = document.querySelectorAll('.fade-in');
 
@@ -796,7 +902,36 @@
                 appearOnScroll.observe(fader);
             });
 
-            // --- ADDED: 3. Back to Top Button Logic ---
+            // --- ADDED: 2b. Staggered Grid Fade-in (Portfolio) ---
+            const gridContainer = document.querySelector('.stagger-grid-container');
+            
+            if (gridContainer) {
+                const gridItems = gridContainer.querySelectorAll('.portfolio-item');
+                
+                const gridObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+                        
+                        // Grid container is visible, stagger the items
+                        let delay = 0;
+                        gridItems.forEach(item => {
+                            setTimeout(() => {
+                                item.classList.add('is-visible');
+                            }, delay);
+                            delay += 150; // 150ms stagger
+                        });
+                        
+                        observer.unobserve(entry.target); // Done
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }); // Trigger when 10% of grid is visible
+
+                gridObserver.observe(gridContainer);
+            }
+
+
+            // --- 3. Back to Top Button Logic ---
             const backToTopBtn = document.getElementById('backToTopBtn');
 
             window.addEventListener('scroll', function() {
@@ -809,7 +944,7 @@
             });
             // Note: The smooth scroll is handled by `scroll-behavior: smooth;` in the CSS
 
-            // --- ADDED: 4. Lightbox Modal Logic ---
+            // --- 4. Lightbox Modal Logic ---
             const modal = document.getElementById('lightboxModal');
             const modalImg = document.getElementById('lightboxImg');
             const captionText = document.getElementById('lightboxCaption');
@@ -842,9 +977,40 @@
                 }
             });
 
+            // --- ADDED: 5. Hero Parallax Effect ---
+            const heroContent = document.querySelector('.hero-content');
+            const heroSection = document.getElementById('hero');
+
+            // Only add parallax if hero content and section exist
+            if (heroContent && heroSection) {
+                const handleParallax = () => {
+                    const scrollY = window.scrollY;
+                    
+                    // Only run if hero section is roughly in view
+                    if (scrollY < heroSection.offsetHeight + 100) {
+                        const moveSpeed = 0.3; // Content moves at 30% of scroll speed
+                        const fadeSpeed = 1.5; // Content fades out 1.5x faster than scroll
+                        
+                        // Calculate opacity, ensuring it doesn't go below 0
+                        let newOpacity = 1 - (scrollY / (heroSection.offsetHeight / fadeSpeed));
+                        newOpacity = newOpacity < 0 ? 0 : newOpacity;
+                        
+                        heroContent.style.transform = `translateY(${scrollY * moveSpeed}px)`;
+                        heroContent.style.opacity = newOpacity;
+                    }
+                };
+                
+                // Use requestAnimationFrame for smoother animation
+                window.addEventListener('scroll', () => {
+                    window.requestAnimationFrame(handleParallax);
+                });
+            }
+
         });
     </script>
 
 </body>
 </html>
+
+
 
