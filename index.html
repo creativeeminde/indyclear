@@ -205,16 +205,15 @@
             justify-content: center;
             text-align: center;
             padding: 0 1.5rem;
-            /* ADDED: For parallax effect */
-            position: relative;
+            /* ADDED: Fix for parallax overflow */
             overflow: hidden;
+            position: relative;
         }
 
         .hero-content {
             max-width: 800px;
-            /* ADDED: For parallax effect. Will be manipulated by JS */
+            /* ADDED: Will-change for parallax performance */
             will-change: transform, opacity;
-            transition: transform 0.1s linear, opacity 0.1s linear;
         }
 
         #hero h1 {
@@ -248,47 +247,42 @@
             line-height: 1.8;
         }
 
-        /* --- ADDED: 5b. Services Section --- */
-        #services {
-            /* Kept with the white background, alternating from grey #about */
-            background-color: var(--color-bg); 
-        }
-
+        /* --- 6. Services Section --- */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2x2 grid on desktop */
-            gap: 3rem;
-            text-align: center;
-            max-width: 900px; /* Constrain width a bit */
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            max-width: 900px;
             margin: 0 auto;
         }
-
+        
         .service-item {
-            padding: 2rem 1.5rem;
-            transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-            border-radius: 8px;
+            background: #ffffff;
             border: 1px solid var(--color-border);
-            background-color: var(--color-bg-alt); /* Light grey background for items */
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
-
-        .service-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            background-color: var(--color-bg); /* White on hover */
-        }
-
+        
         .service-item .icon {
-            font-size: 3rem;
-            color: var(--color-brand); /* Use brand color for icons */
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
         .service-item h3 {
             font-size: 1.25rem;
-            color: var(--color-text);
         }
 
-        /* --- 6. Portfolio / Designs Gallery --- */
+        .service-item p {
+            font-size: 0.95rem;
+            margin-bottom: 0; /* Remove last margin */
+        }
+
+        /* --- 7. Portfolio / Designs Gallery --- */
         #portfolio {
             background-color: var(--color-bg-alt);
         }
@@ -307,13 +301,13 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: box-shadow 0.3s ease, transform 0.3s ease;
             
-            /* ADDED: Animation styles for staggered fade-in */
+            /* ADDED: For staggered fade-in */
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease, transform 0.3s ease;
         }
-
-        /* ADDED: Visible state for staggered fade-in */
+        
+        /* ADDED: Class for staggered fade-in */
         .portfolio-item.is-visible {
             opacity: 1;
             transform: translateY(0);
@@ -337,7 +331,7 @@
             transform: scale(1.05); /* Zoom hover effect */
         }
         
-        /* --- 7. Design Process Section --- */
+        /* --- 8. Design Process Section --- */
         .process-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -346,17 +340,16 @@
         }
 
         .process-step {
-            padding: 1rem;
-            /* ADDED: Transitions for hover effect */
-            transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-            border-radius: 8px; /* Added for hover effect */
+            padding: 1.5rem;
+            border-radius: 8px;
+            /* ADDED: Transitions for hover */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        /* ADDED: Hover animation for process steps */
+        
+        /* ADDED: Hover effect for process steps */
         .process-step:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            background-color: var(--color-bg); /* Use light bg to make shadow visible */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
         }
 
         .process-step .icon {
@@ -373,7 +366,7 @@
             font-size: 0.95rem;
         }
 
-        /* --- 8. Contact Section --- */
+        /* --- 9. Contact Section --- */
         #contact {
             background-color: var(--color-bg-alt);
         }
@@ -434,7 +427,7 @@
             color: red;
         }
 
-        /* --- 9. Footer --- */
+        /* --- 10. Footer --- */
         /* ** UPDATED CSS FOR FOOTER ** */
         .main-footer {
             background-color: #2c4342; /* MODIFIED: Changed from #a55829 */
@@ -464,9 +457,9 @@
             color: #ffffff; /* Brighter on hover */
         }
 
-        /* --- 10. Animation & Responsive Design --- */
+        /* --- 11. Animation & Responsive Design --- */
 
-        /* Subtle fade-in animation (for general elements) */
+        /* Subtle fade-in animation (for sections) */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -478,7 +471,7 @@
             transform: translateY(0);
         }
 
-        /* --- 11. Back to Top Button --- */
+        /* --- 12. Back to Top Button --- */
         #backToTopBtn {
             display: none; /* Hidden by default */
             position: fixed;
@@ -513,7 +506,7 @@
             opacity: 1;
         }
 
-        /* --- 12. Lightbox Modal --- */
+        /* --- 13. Lightbox Modal --- */
         .lightbox-modal {
             display: none; /* Hidden by default */
             position: fixed;
@@ -579,6 +572,10 @@
             .portfolio-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .services-grid {
+                grid-template-columns: 1fr; /* Stack services on tablet */
+            }
         }
 
         /* Mobile Responsive Styles */
@@ -612,12 +609,16 @@
             .nav-links li {
                 margin-left: 0;
             }
+            
+            .services-grid {
+                grid-template-columns: 1fr; /* Already set, but good for clarity */
+            }
 
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
 
-            .services-grid {
+            .process-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -642,7 +643,6 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
-                    <!-- ADDED: Services Link -->
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Designs</a></li>
                     <li><a href="#process">Process</a></li>
@@ -655,8 +655,7 @@
     <main>
 
         <section id="hero">
-            <!-- MODIFIED: Removed .fade-in, parallax is handled by JS -->
-            <div class="hero-content">
+            <div class="hero-content fade-in">
                 
                 <!-- MODIFIED: Image moved above h1 and styles for border/shadow removed -->
                 <img src="https://ik.imagekit.io/siey4arglq/Whisk_862786e0a5d1db7aa6d4fe1cb4ab6b31eg-Photoroom.png?updatedAt=1761932773289" 
@@ -692,31 +691,26 @@
             <div class="container">
                 <h2 class="fade-in">Our Services</h2>
                 <div class="services-grid">
-                    
                     <div class="service-item fade-in">
-                        <div class="icon">👕</div> 
+                        <div class="icon">👕</div>
                         <h3>Custom Apparel Design</h3>
-                        <p>Unique, 100% original graphics created exclusively for your clothing line or personal brand.</p>
+                        <p>Unique, 100% original graphics created for your brand, team, or personal collection.</p>
                     </div>
-                    
                     <div class="service-item fade-in">
-                        <div class="icon">🎨</div> 
+                        <div class="icon">✨</div>
                         <h3>Brand Identity</h3>
-                        <p>Logo design, color palettes, and visual guidelines that capture your brand's essence.</p>
+                        <p>Logo design, color palettes, and visual guidelines that tell your brand's unique story.</p>
                     </div>
-                    
                     <div class="service-item fade-in">
-                        <div class="icon">🖼️</div> 
+                        <div class="icon">🎨</div>
                         <h3>Illustration Commissions</h3>
-                        <p>Bespoke artwork for digital use, print, or special projects, crafted in our signature style.</p>
+                        <p>Custom digital illustrations for web, print, or personal art commissions.</p>
                     </div>
-
                     <div class="service-item fade-in">
-                        <div class="icon">🤝</div> 
+                        <div class="icon">🤝</div>
                         <h3>Collaboration Opportunities</h3>
-                        <p>We're open to partnering with other creators, brands, and shops on exciting new projects.</p>
+                        <p>We're open to special projects and partnerships with like-minded brands and creators.</p>
                     </div>
-                    
                 </div>
             </div>
         </section>
@@ -724,32 +718,30 @@
         <section id="portfolio">
             <div class="container">
                 <h2 class="fade-in">Our Designs</h2>
-                <!-- MODIFIED: Added 'stagger-grid-container' class for the new JS observer -->
-                <div class="portfolio-grid stagger-grid-container">
+                <div class="portfolio-grid">
                     <!-- NOTE: The JS will now make these images clickable -->
-                    <!-- MODIFIED: Removed 'fade-in' class from all items -->
                     <div class="portfolio-item">
-                        <img src="https://ik.imagekit.io/siey4arglq/Whisk_273735d53b.jpg">
+                        <img src="https://ik.imagekit.io/siey4arglq/Whisk_273735d53b.jpg" alt="Design 1">
                     </div>
                     
                     <div class="portfolio-item">
-                        <img src="https://ik.imagekit.io/siey4arglq/2.jpg">
+                        <img src="https://ik.imagekit.io/siey4arglq/2.jpg" alt="Design 2">
                     </div>
                     
                     <div class="portfolio-item">
-                        <img src="https://ik.imagekit.io/siey4arglq/1d%20(1)%20(1).jpg?updatedAt=1761934066104">
+                        <img src="https://ik.imagekit.io/siey4arglq/1d%20(1)%20(1).jpg?updatedAt=1761934066104" alt="Design 3">
                     </div>
                     
                     <div class="portfolio-item">
-                        <img src="https://ik.imagekit.io/siey4arglq/1.jpg?updatedAt=1761934057374">
+                        <img src="https://ik.imagekit.io/siey4arglq/1.jpg?updatedAt=1761934057374" alt="Design 4">
                     </div>
                     
                     <div class="portfolio-item">
-                        <img src="https://ik.imagekit.io/siey4arglq/d1.jpg?updatedAt=1761934040546">
+                        <img src="https://ik.imagekit.io/siey4arglq/d1.jpg?updatedAt=1761934040546" alt="Design 5">
                     </div>
                     
                     <div class="portfolio-item">
-                        <img src="https://ik.imagekit.io/siey4arglq/2s.jpg?updatedAt=1761934052829">
+                        <img src="https://ik.imagekit.io/siey4arglq/2s.jpg?updatedAt=1761934052829" alt="Design 6">
                     </div>
                 </div>
             </div>
@@ -878,7 +870,7 @@
             }
 
             
-            // --- 2. Subtle Fade-in Animation on Scroll (General) ---
+            // --- 2. Subtle Fade-in Animation on Scroll (for Sections) ---
             
             const faders = document.querySelectorAll('.fade-in');
 
@@ -902,49 +894,44 @@
                 appearOnScroll.observe(fader);
             });
 
-            // --- ADDED: 2b. Staggered Grid Fade-in (Portfolio) ---
-            const gridContainer = document.querySelector('.stagger-grid-container');
-            
-            if (gridContainer) {
-                const gridItems = gridContainer.querySelectorAll('.portfolio-item');
-                
-                const gridObserver = new IntersectionObserver(function(entries, observer) {
-                    entries.forEach(entry => {
-                        if (!entry.isIntersecting) {
-                            return;
-                        }
-                        
-                        // Grid container is visible, stagger the items
-                        let delay = 0;
-                        gridItems.forEach(item => {
+            // --- ADDED: 3. Staggered Fade-in for Portfolio ---
+            const portfolioGrid = document.querySelector('.portfolio-grid');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            const portfolioObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        portfolioItems.forEach((item, index) => {
+                            // Apply a delay to each item
                             setTimeout(() => {
                                 item.classList.add('is-visible');
-                            }, delay);
-                            delay += 150; // 150ms stagger
+                            }, index * 150); // 150ms delay between items
                         });
-                        
-                        observer.unobserve(entry.target); // Done
-                    });
-                }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }); // Trigger when 10% of grid is visible
+                        observer.unobserve(portfolioGrid); // Stop observing
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of the grid is visible
 
-                gridObserver.observe(gridContainer);
+            if (portfolioGrid) {
+                portfolioObserver.observe(portfolioGrid);
             }
 
 
-            // --- 3. Back to Top Button Logic ---
+            // --- 4. Back to Top Button Logic ---
             const backToTopBtn = document.getElementById('backToTopBtn');
 
-            window.addEventListener('scroll', function() {
-                // Show button after scrolling down 200px
-                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                    backToTopBtn.classList.add('show');
-                } else {
-                    backToTopBtn.classList.remove('show');
-                }
-            });
-            // Note: The smooth scroll is handled by `scroll-behavior: smooth;` in the CSS
+            if (backToTopBtn) {
+                window.addEventListener('scroll', function() {
+                    // Show button after scrolling down 200px
+                    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                        backToTopBtn.classList.add('show');
+                    } else {
+                        backToTopBtn.classList.remove('show');
+                    }
+                });
+            }
 
-            // --- 4. Lightbox Modal Logic ---
+            // --- 5. Lightbox Modal Logic ---
             const modal = document.getElementById('lightboxModal');
             const modalImg = document.getElementById('lightboxImg');
             const captionText = document.getElementById('lightboxCaption');
@@ -956,28 +943,36 @@
             // Loop through each image and add a click event
             portfolioImages.forEach(img => {
                 img.addEventListener('click', function() {
-                    modal.style.display = 'block';
-                    modalImg.src = this.src;
-                    captionText.innerHTML = this.alt || ''; // Use the alt text as a caption (or empty string if no alt)
+                    if(modal && modalImg && captionText) {
+                        modal.style.display = 'block';
+                        modalImg.src = this.src;
+                        captionText.innerHTML = this.alt || ''; // Use the alt text as a caption
+                    }
                 });
             });
 
             // Function to close the modal
             function closeModal() {
-                modal.style.display = 'none';
+                if(modal) {
+                    modal.style.display = 'none';
+                }
             }
 
             // Close the modal when the 'x' is clicked
-            closeBtn.addEventListener('click', closeModal);
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+            }
 
             // Close the modal when clicking on the background (outside the image)
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // --- ADDED: 5. Hero Parallax Effect ---
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+            }
+            
+            // --- ADDED: 6. Hero Parallax Effect ---
             const heroContent = document.querySelector('.hero-content');
             const heroSection = document.getElementById('hero');
 
@@ -1006,11 +1001,33 @@
                 });
             }
 
+            // --- ADDED: 7. Smooth Scroll without URL Hash Update ---
+            const internalLinks = document.querySelectorAll('a[href^="#"]');
+
+            internalLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    
+                    // Check if it's a valid internal link and not just a standalone "#"
+                    if (targetId && targetId.length > 1) {
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            // Stop the default anchor link behavior (which changes the URL)
+                            e.preventDefault();
+                            
+                            // Manually scroll to the target element
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
         });
     </script>
 
 </body>
 </html>
-
-
 
